@@ -161,8 +161,12 @@ Filterbtn.addEventListener("click", (e) => {const filterValue = e.target.value;
 
 //  LOCAL STORAGE
 
-const getTodosLocalStorage=()=>{const todos = JSON.parse(localStorage.getItem("todos")) || [];
-return todos}
+const getTodosLocalStorage=()=>{const storageTodos = localStorage
+.getItem("todos")
+if(!storageTodos||storageTodos==='undefined'){
+  return []}
+else {const todos = JSON.parse(localStorage.getItem("todos"))||[]
+return todos}}
 
 
 const loadTodos= ()=>{const todos = getTodosLocalStorage()
@@ -176,7 +180,7 @@ localStorage.setItem("todos",JSON.stringify(todos))}
 const removeTodoLocalStorage = (todoText)=>{const todos = getTodosLocalStorage()
 const filteredTodos = todos.filter((todo)=>todo.text != todoText)
 
-localStorage.setItem("todos", JSON.stringify(filterTodos))}
+localStorage.setItem("todos", JSON.stringify(filteredTodos))}
 
 
 const updateTodoStatusLocalStorage = (todoText) => {
